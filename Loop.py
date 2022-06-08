@@ -36,7 +36,7 @@ bot.sendMessage(chat_id, str(msggg))
 ####################################
 
 klm = 0    
-file = './PiAuto/STOCK.csv'
+file = '/home/kali/PiAuto/STOCK.csv'
 with open(file) as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     CSV_Investment = []
@@ -63,7 +63,7 @@ with open(file) as csvfile:
                 Type = row[1]
                 kt = 0
 
-                j2 = 900
+                j2 = 100
                 Brkg = 0.05
                 Tax = 0.3
                 ###################################
@@ -892,9 +892,29 @@ with open(file) as csvfile:
             except Exception as e: print(e)
     except Exception as e: print(e)
 
+df=pd.read_csv('portfolio.csv')
+df['Dbuy'] =  pd.to_datetime(df['Dbuy'], format='%Y-%m-%d')
+nn = len (df)
+df["SoldDate"] = 0
+for i in range (0,nn):
+    k = int(df['SoldOnDays'][i])
+    df["SoldDate"][i] = df['Dbuy'][i] + timedelta(days=k)
 
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.express as px
+import pandas as pd
 
+tod = datetime.datetime.now()
 
+fig = px.scatter(df, x="Dbuy", y="Type", color="RSI")
+fig.add_vline(x=tod, line_width=3, line_dash="dash", line_color="green")
+fname = "fig.html"
+fig.write_html(fname)
+bot.sendMessage(chat_id, "str(msgg)")
+#bot.sendDocument(chat_id, document='AARTIIND.NS.png')
+bot.sendDocument(chat_id, document = open(fname,'rb'), caption = "Graph" )
+bot.sendDocument(chat_id, document = open('portfolio.csv','rb'), caption = "CSV" )
 
 
 
