@@ -36,7 +36,7 @@ bot.sendMessage(chat_id, str(msggg))
 ####################################
 
 klm = 0    
-file = 'STOCK.csv'
+file = './PiAuto/STOCK.csv'
 with open(file) as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     CSV_Investment = []
