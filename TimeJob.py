@@ -27,3 +27,9 @@ if HHR > 7 and HHR <= 23 and MMN == 5:
 
 if HHR > 9 and HHR <= 15 and MMN == 17:
     os.system('sudo python3 /home/kali/PiAuto/Portfolio.py')
+
+if HHR == 17 and MMN == 17:
+    os.system('sudo python3 /home/kali/PiAuto/PortfolioSend.py')
+
+if HHR == 8 and MMN == 17:
+    os.system('sudo python3 /home/kali/PiAuto/PortfolioSend.py')
