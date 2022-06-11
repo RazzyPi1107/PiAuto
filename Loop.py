@@ -36,7 +36,8 @@ bot.sendMessage(chat_id, str(msggg))
 ####################################
 
 klm = 0    
-file = '/home/kali/PiAuto/STOCK.csv'
+file = '/home/kali/PiAuto/ALLSTOCKS.csv'
+#file = 'ALLSTOCKS.csv'
 with open(file) as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     CSV_Investment = []
@@ -47,8 +48,8 @@ with open(file) as csvfile:
     
     
     ########################## 
-    try:
-    #if 4>3:
+    #try:
+    if 4>3:
         for row in readCSV :
             print (row)
 
@@ -59,8 +60,8 @@ with open(file) as csvfile:
 
 
 
-                SymbolNS = row[0]
-                Type = row[1]
+                SymbolNS = row[5]
+                Type = row[4]
                 kt = 0
 
                 j2 = 100
@@ -144,9 +145,9 @@ with open(file) as csvfile:
                 ProfPList = []
                 SellerList =[]
                 STYPE= []
-
-
-
+                IndustryL = []
+                SeriesL = []
+                CompanyL = []
                 ################################## Loop Parameters
 
                 index = 0
@@ -175,7 +176,7 @@ with open(file) as csvfile:
 
 
 
-                aa.drop(columns=['Dividends','Stock Splits'],inplace=True)
+                #aa.drop(columns=['Dividends','Stock Splits'],inplace=True)
                 aa['50MA'] = aa.Close.rolling(50).mean() #50 day moving avg
                 aa['200MA'] = aa.Close.rolling(200).mean() #200 day moving avg
                 aa['52WH'] = aa.High.rolling(256).max() #256 is number of rows
@@ -459,11 +460,11 @@ with open(file) as csvfile:
                             #if pr < 3000 and calling < 0:
                     print ("----------------------------------------------------------------------------------")
 
-                    if d1<0 and d1>-1:
+                    if d1<0 and d1>-5:
                         print ("d1>0", d1)
                         if d3<0:
                             print ("d3<0", d3)
-                            if d7<-3 or d10<-5 :
+                            if d7<-2 or d10<-3 :
                                 print (" d7<-5 or d10<-7",d7,d10)
                                 #if d15<-9 or d30<-12:
                                 if 1 > 0:
@@ -482,6 +483,7 @@ with open(file) as csvfile:
                                                         if prl <= blbb:
 
                                                             print ("pr < bbmean", pr, bbmean)
+
 
 
                                                             print("<-------------------------------------------------------------------")
@@ -512,6 +514,9 @@ with open(file) as csvfile:
                                                             EMA50B.append(ema50)
                                                             RSIB.append (rsi)
                                                             STYPE.append(Type)
+                                                            IndustryL.append(row[1])
+                                                            SeriesL.append(row[3])
+                                                            CompanyL.append(row[0])
 
 
 
@@ -532,6 +537,7 @@ with open(file) as csvfile:
                                                             targetB.append(target)
                                                             kt = 1
                                                             print ("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+                                                            #time.sleep(5)
 
                                                             if dbuy == today :
                                                                 print (" %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
@@ -574,7 +580,7 @@ with open(file) as csvfile:
 
                 if (kt > 0):
 
-                    datab ={'Dbuy':dbuyy, 'Stk^':StkListB, 'Bought':PriceB, 'Qty':QtyB, 'Rsk':RISKB, 'Target':targetB,'MACD Call': MACDmB, 'BBMean': BBmemB , 'RSI' :RSIB, 'Type' : STYPE   }
+                    datab ={'Dbuy':dbuyy, 'Stk^':StkListB, 'Bought':PriceB, 'Qty':QtyB, 'Rsk':RISKB, 'Target':targetB,'MACD Call': MACDmB, 'BBMean': BBmemB , 'RSI' :RSIB, 'Type' : STYPE , "Industry" : IndustryL , "Series" :SeriesL, "Company" : CompanyL }
                     dff = pd.DataFrame(datab)
                     print (dff)
                     dff['Dbuy'] = pd.to_datetime(dff['Dbuy'], format='%Y-%m-%d')
@@ -890,7 +896,7 @@ with open(file) as csvfile:
                         klm = 2
 
             except Exception as e: print(e)
-    except Exception as e: print(e)
+    #except Exception as e: print(e)
 
 df=pd.read_csv('portfolio.csv')
 df['Dbuy'] =  pd.to_datetime(df['Dbuy'], format='%Y-%m-%d')
@@ -904,18 +910,47 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
+from plotly_calplot import calplot
+
+
+
+
+fig = calplot(
+    df,
+    x="Dbuy",
+    y="Invest",
+    dark_theme=False,
+    years_title=True,
+    colorscale="reds",
+    gap=1,
+    name="Data",
+    month_lines_width=2,
+    month_lines_color="#000000"
+)
+#fig.show()
 
 tod = datetime.datetime.now()
 
-fig = px.scatter(df, x="Dbuy", y="Type", color="RSI")
-fig.add_vline(x=tod, line_width=3, line_dash="dash", line_color="green")
-fname = "fig.html"
+fname = '/home/kali/PiAuto/fig.html'
+
+#fname = "fig.html"
 fig.write_html(fname)
 bot.sendMessage(chat_id, "str(msgg)")
 #bot.sendDocument(chat_id, document='AARTIIND.NS.png')
 bot.sendDocument(chat_id, document = open(fname,'rb'), caption = "Graph" )
 bot.sendDocument(chat_id, document = open('portfolio.csv','rb'), caption = "CSV" )
 
+sorted_df = df.sort_values(by=['Dbuy'], ascending=False)
+
+Columns = ['Dbuy', 'Stk^']
+
+send_df = sorted_df[Columns]
+send_df2 =send_df.head(5)
+send_df2
+send_df2.set_index("Dbuy", inplace = True)
+bot = telepot.Bot('1356204823:AAHY1lxuINcDabR6mfrRYMP-ojd11IcYna8')
+chat_id = '1047135684'
+bot.sendMessage(chat_id, str(send_df2))
 
 
 
