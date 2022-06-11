@@ -48,8 +48,8 @@ with open(file) as csvfile:
     
     
     ########################## 
-    #try:
-    if 4>3:
+    try:
+    #if 4>3:
         for row in readCSV :
             print (row)
 
@@ -896,7 +896,14 @@ with open(file) as csvfile:
                         klm = 2
 
             except Exception as e: print(e)
-    #except Exception as e: print(e)
+    except Exception as e:
+        print(e)
+        try:
+            print (e)
+            bot.sendMessage(chat_id, str(e))
+
+        except:
+            print (e)
 
 df=pd.read_csv('portfolio.csv')
 df['Dbuy'] =  pd.to_datetime(df['Dbuy'], format='%Y-%m-%d')
