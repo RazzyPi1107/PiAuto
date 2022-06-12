@@ -1,4 +1,4 @@
-Company Name,Industry,Symbol,Series,Type,SymbolNS
+﻿Company Name,Industry,Symbol,Series,Type,SymbolNS
 Adani Ports and Special Economic Zone Ltd.,Services,ADANIPORTS,EQ,N50,ADANIPORTS.NS
 Apollo Hospitals Enterprise Ltd.,Healthcare,APOLLOHOSP,EQ,N50,APOLLOHOSP.NS
 Asian Paints Ltd.,Consumer Durables,ASIANPAINT,EQ,N50,ASIANPAINT.NS
@@ -508,7 +508,7 @@ Quantum Index Fund - Growth,NIFTY 50 Index,QNIFTY,ETF,ETF - Equity,QNIFTY.NS
 Religare Invesco NIFTY ETF,NIFTY 50 Index,RELGRNIFTY,ETF,ETF - Equity,RELGRNIFTY.NS
 SBI ETF NIFTY,NIFTY 50 Index,SETFNIFTY,ETF,ETF - Equity,SETFNIFTY.NS
 UTI NIFTY ETF,NIFTY 50 Index,UTINIFTETF,ETF,ETF - Equity,UTINIFTETF.NS
-Birla Sun Life NIFTY ETF,NIFTY 50� Index,BSLNIFTY,ETF,ETF - Equity,BSLNIFTY.NS
+Birla Sun Life NIFTY ETF,NIFTY 50  Index,BSLNIFTY,ETF,ETF - Equity,BSLNIFTY.NS
 ICICI Prudential CNX 100 ETF,NIFTY 100,ICNX100,ETF,ETF - Equity,ICNX100.NS
 Kotak Banking ETF,NIFTY Bank,KOTAKBKETF,ETF,ETF - Equity,KOTAKBKETF.NS
 SBI ETF Banking,NIFTY Bank,SETFBANK,ETF,ETF - Equity,SETFBANK.NS
