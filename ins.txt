@@ -1,0 +1,29 @@
+sudo apt-get install kodi -y
+
+sudo apt-get install libatlas-base-dev -y
+sudo apt-get install python-opencv -y
+sudo apt-get install libopencv-dev -y
+sudo apt-get install python-numpy -y
+sudo apt-get install python-dev -y
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
+sudo apt-get install fswebcam -y
+sudo pip install paho-mqtt
+sudo apt-get install python3-tk
+sudo pip3 install Xlib
+sudo apt-get install espeak -y
+sudo apt-get install festival -y
+sudo apt-get install luvcview -y
+sudo apt-get install midori -y
+sudo apt-get install apache2 -y
+sudo apt-get install php libapache2-mod-php -y
+sudo apt-get install git-core -y
+sudo apt install firefox-esr -y
+sudo apt-get install unzip -y
+sudo apt install chromium-chromedriver -y
+sudo apt install -y unzip xvfb libxi6 libgconf-2-4
+sudo apt -y install google-chrome-stable
+wget -O urserver.deb http://www.unifiedremote.com/d/rpi-deb
+
+sudo dpkg -i urserver.deb
+sudo apt update
+sudo apt full-upgrade -y

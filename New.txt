@@ -1,0 +1,1 @@
+/home/pi/apps/scrcpy/android.sh
