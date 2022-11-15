@@ -331,3 +331,6 @@ zict
 zipp
 zope.event
 zope.interface 
+mplcyberpunk
+PySimpleGUI
+pyttsx3
